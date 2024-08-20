@@ -8,20 +8,69 @@ fetch("http://localhost:5678/api/works").then(function (reponse) {
      });
  });
 
+ let gallery;
 
- function afficherProjets(projets) {
-     console.log("PROJETS", projets);
-    const gallery = document.querySelector(".gallery");
-    gallery.innerHTML="";
-     projets.forEach(function (projet) {
-         const article = document.createElement("article");
-         article.innerText = projet.title;
-         gallery.append(article);
-       const imageElement = document.createElement("img");
-         imageElement.src = projet.imageUrl;
-         gallery.append(imageElement);
-     });
- };
+  function afficherProjets(projets) {
+      console.log("PROJETS", projets);
+     gallery = document.querySelector(".gallery");
+     gallery.innerHTML="";
+
+
+
+
+
+
+
+//     function displayGallery(projets) {
+//         console.log("PROJETS", projets);
+//         gallery = document.querySelector(".gallery");
+//         gallery.innerHTML = "";
+//         //show all works in array
+//         projets.forEach((i) => {
+//           //create tags
+//           const workCard = document.createElement("figure");
+//           const workImage = document.createElement("img");
+//           const workTitle = document.createElement("figcaption");
+//           workImage.src = i.imageUrl;
+//           workImage.alt = i.title;
+//           workTitle.innerText = i.title;
+//           workCard.dataset.category = i.category.name;
+//           workCard.className = "workCard";
+//           //references to DOM
+//           gallery.appendChild(workCard);
+//           workCard.append(workImage, workTitle);
+//         });
+//       }
+      
+    
+    
+    
+      projets.forEach(function (projet) {
+       const sectionFiches = document.createElement("figure");
+        //  sectionFiches.dataset.category = projet.category.name;
+        //  sectionFiches.className = "sectionFiches";
+
+
+
+         const imageElement = document.createElement("img");
+          imageElement.src = projet.imageUrl;
+        
+        
+          const article = document.createElement("figcaption");
+          article.innerText = projet.title;
+       
+         
+        
+         
+        
+        
+          sectionFiches.append(imageElement);
+          sectionFiches.append(article);
+          gallery.appendChild(sectionFiches);
+        
+        
+      });
+  };
 
 window.onload=function(){
 
