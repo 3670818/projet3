@@ -94,9 +94,19 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	
 }
 
 li:hover {
+	color: #B1663C;
+}
+nav a {
+	padding: 0 10px;
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+a:hover {
 	color: #B1663C;
 }
 #introduction {
