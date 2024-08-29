@@ -54,6 +54,17 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+.bandeauEdition{
+	display: none;
+}
+body.connecte.bandeauEdition{
+	display: block;
+	color: black;
+}
+body.connecte.filtre{
+	display: none;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;

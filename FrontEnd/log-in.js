@@ -1,5 +1,5 @@
-//const baseApiUrl = "http://localhost:5678/api/";
-fetch("http://localhost:5678/api/user/login")
+
+//fetch("http://localhost:5678/api/user/login")
 
 document.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -8,7 +8,7 @@ document.addEventListener("submit", (e) => {
     password: document.getElementById("password"),
   };
 
-  fetch(`${baseApiUrl}users/login`, {
+  fetch( "http://localhost:5678/api/users/login", {
     method: "POST",
     headers: {
       Accept: "application/json",

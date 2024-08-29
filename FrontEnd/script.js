@@ -73,6 +73,7 @@ fetch("http://localhost:5678/api/works").then(function (reponse) {
   };
 
 window.onload=function(){
+    
 
     const boutonFiltre = document.querySelector(".btn-Appart");
 
@@ -119,7 +120,7 @@ window.onload=function(){
     });
 
 
-
+  
 
 
 
@@ -135,7 +136,31 @@ window.onload=function(){
 
 
 
+
+    function adminUserMode() {
+        const token = sectionStorage.getItem("token");
+        const estConnecte =token !==null;
+        if(estConnecte) {
+        //     //afficher le bandeu mode edition
+        //     //cacher les filtres
+        document.querySelector(".btn-objet").style.display = "none";
+        document.querySelector(".btn-Appart").style.display = "none";
+        document.querySelector(".btn-hotelEtRestaurant").style.display = "none";
+        //     //ajouter le bouton modifier
+        const boutonModifier = document.querySelector(".btn-modifier");
+
+        boutonModifier.innerHTML=
+        
+
+
+        }
+        }
+
+
+
+
 };
+
 
 
 
