@@ -1,5 +1,6 @@
 
 let tousLesProjets;
+let modal;
 
 fetch("http://localhost:5678/api/works").then(function (reponse) {
     reponse.json().then(function (projets) {
@@ -15,35 +16,6 @@ fetch("http://localhost:5678/api/works").then(function (reponse) {
      gallery = document.querySelector(".gallery");
      gallery.innerHTML="";
 
-
-
-
-
-
-
-//     function displayGallery(projets) {
-//         console.log("PROJETS", projets);
-//         gallery = document.querySelector(".gallery");
-//         gallery.innerHTML = "";
-//         //show all works in array
-//         projets.forEach((i) => {
-//           //create tags
-//           const workCard = document.createElement("figure");
-//           const workImage = document.createElement("img");
-//           const workTitle = document.createElement("figcaption");
-//           workImage.src = i.imageUrl;
-//           workImage.alt = i.title;
-//           workTitle.innerText = i.title;
-//           workCard.dataset.category = i.category.name;
-//           workCard.className = "workCard";
-//           //references to DOM
-//           gallery.appendChild(workCard);
-//           workCard.append(workImage, workTitle);
-//         });
-//       }
-      
-    
-    
     
       projets.forEach(function (projet) {
        const sectionFiches = document.createElement("figure");
@@ -135,26 +107,9 @@ window.onload=function(){
     // });
 
 
+adminUserMode()
 
-
-    function adminUserMode() {
-        const token = sectionStorage.getItem("token");
-        const estConnecte =token !==null;
-        if(estConnecte) {
-        //     //afficher le bandeu mode edition
-        //     //cacher les filtres
-        document.querySelector(".btn-objet").style.display = "none";
-        document.querySelector(".btn-Appart").style.display = "none";
-        document.querySelector(".btn-hotelEtRestaurant").style.display = "none";
-        //     //ajouter le bouton modifier
-        const boutonModifier = document.querySelector(".btn-modifier");
-
-        boutonModifier.innerHTML=
-        
-
-
-        }
-        }
+  
 
 
 
@@ -162,10 +117,134 @@ window.onload=function(){
 };
 
 
+function adminUserMode() {
+    const token = sessionStorage.getItem("token");
+    const estConnecte =token !==null;
+    if(estConnecte) {
+    //     //afficher le bandeu mode edition
+    // const boutonFiltre = document.querySelector(".ban");
+
+    // boutonFiltre.addEventListener("click", function () {
+    // const projetAppart = tousLesProjets.filter(function (projet) {
+    //    return projet.category.name === "Appartements";
+    // });
+    // afficherProjets(projetAppart)
+    // console.log(projetAppart)
+    // });
+
+   
 
 
 
 
+
+
+
+    //     //cacher les filtres
+    document.querySelector(".btn-objet").remove()
+    document.querySelector(".btn-Appart").style.display = "none";
+    document.querySelector(".btn-hotelEtRestaurant").style.display = "none";
+    document.querySelector(".btn-tous").style.display = "none";
+    //     //ajouter le bouton modifier
+    //document.getElementById("logBtn").innerText = "logout";
+    
+    
+    const boutonModifier = document.createElement("div");
+    boutonModifier.classList.add("btn-modifier");
+    boutonModifier.innerText = "Modifier";
+    document.body.append(boutonModifier);
+
+
+    
+    boutonModifier.addEventListener("click", ()=>{
+        console.log(imageElement );
+        const fondPopup = document.createElement("div");
+        fondPopup.classList.add("fondPopup");
+        // mettre les images
+        // const contentPopup = document.createElement("div");
+        // contentPopup.classList.add("content")
+    
+        const popup = document.createElement("div");
+        popup.classList.add("popup");
+        popup.innerHTML = `
+            <div class="boutonFermer">X</div>
+            <h2>Galerie photo</h2>
+            <button >Toutes les photos </button>
+            // <div class="cont"></div>
+           
+             
+        `}
+        // const imageElement = document.createElement("img");
+        // imageElement.src = projet.imageUrl;
+        
+    ;)
+    
+        popup.querySelector(".boutonFermer").addEventListener("click", function() {
+            fondPopup.remove(); })
+    (t)
+
+        //  contentPopup=popup.querySelector("cont")
+
+        const boutonAjout = document.createElement("div");
+    boutonAjout.classList.add("btn-ajt");
+    boutonAjout.innerText = "Ajouter";
+    popup.append(boutonAjout);
+
+
+    
+    boutonAjout.addEventListener("click", ()=>{
+        console.log(imageElement )
+        const fondPopup = document.createElement("div");
+        fondPopup.classList.add("fondPopup");
+    
+        const popup2 = document.createElement("div");
+        popup2.classList.add("popup2");
+        popup.innerHTML = "";
+    
+        fondPopup.append(popup2);
+    
+        document.body.append(fondPopup);
+    })}}
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+//   
+
+
+
+
+
+
+    // function displayGallery(projet) {
+    //     console.log("PROJETS", projets);
+    //     gallery = document.querySelector(".gallery");
+    //     gallery.innerHTML="";
+    //     gallery = document.querySelector(".gallery");
+    //     gallery.innerHTML = "";
+    //     //show all works in array
+    //     projet.forEach((i) => {
+    //       //create tags
+          
+    //       const workImage = document.createElement("img");
+          
+    //       workImage.src = i.imageUrl;
+        
+    //       workCard.dataset.category = i.category.name;
+    //       workCard.className = "workCard";
+    //       //references to DOM
+    //       gallery.appendChild(workCard);
+    //       workCard.append(workImage, workTitle);
+    //     });
+    //   }
 
 
 
@@ -189,4 +268,19 @@ window.onload=function(){
 //    });
 //   console.log(projetHotel)
 //   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

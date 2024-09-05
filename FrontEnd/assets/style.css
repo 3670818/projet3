@@ -56,19 +56,22 @@ body {
 }
 .bandeauEdition{
 	display: none;
+	
 }
-body.connecte.bandeauEdition{
+body .estConnecte .bandeauEdition{
 	display: block;
 	color: black;
+	background-color: violet;
 }
-body.connecte.filtre{
+/**body.connecte .filtre{
 	display: none;
-}
+}**/
 
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
+
 }
 section {
 	margin: 50px 0
@@ -229,3 +232,42 @@ button{
     height: 40px;
 }
 
+.fondPopup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	}
+	
+	.popup {
+	height: 50%;
+	width: 50%;
+	background-color: white;
+	border-radius: 0.5rem;
+	}
+
+
+
+	.modal {
+	position: fixed;
+    top: 50%;
+	left: 50%;
+	transform: translate(-50, -50) ;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	width: 300px;
+
+	}
+	.modal
+
+	.modal.active{
+		transform: translate(-50, -50) scale(1);
+
+	}
