@@ -58,10 +58,19 @@ body {
 	display: none;
 	
 }
-body .estConnecte .bandeauEdition{
+body.estConnecte .bandeauEdition{
 	display: block;
-	color: black;
-	background-color: violet;
+	color: white;
+	background-color: black;
+	height: 59px;
+}
+.title{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	padding-top: 20px ;
+
 }
 /**body.connecte .filtre{
 	display: none;

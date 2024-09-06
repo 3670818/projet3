@@ -121,7 +121,9 @@ function adminUserMode() {
     const token = sessionStorage.getItem("token");
     const estConnecte =token !==null;
     if(estConnecte) {
-    //     //afficher le bandeu mode edition
+        //afficher le bandeu mode edition
+        document.body.classList.add("estConnecte")
+    
     // const boutonFiltre = document.querySelector(".ban");
 
     // boutonFiltre.addEventListener("click", function () {
@@ -141,70 +143,104 @@ function adminUserMode() {
 
 
     //     //cacher les filtres
-    document.querySelector(".btn-objet").remove()
-    document.querySelector(".btn-Appart").style.display = "none";
-    document.querySelector(".btn-hotelEtRestaurant").style.display = "none";
-    document.querySelector(".btn-tous").style.display = "none";
-    //     //ajouter le bouton modifier
-    //document.getElementById("logBtn").innerText = "logout";
-    
-    
-    const boutonModifier = document.createElement("div");
-    boutonModifier.classList.add("btn-modifier");
-    boutonModifier.innerText = "Modifier";
-    document.body.append(boutonModifier);
+        document.querySelector(".btn-objet").remove()
+        document.querySelector(".btn-Appart").style.display = "none";
+        document.querySelector(".btn-hotelEtRestaurant").style.display = "none";
+        document.querySelector(".btn-tous").style.display = "none";
+
+
+
+       //ajouter le bouton modifier
+        const boutonModifier = document.createElement("div");
+        boutonModifier.classList.add("btn-modifier");
+        boutonModifier.innerText = "Modifier";
+        document.body.append(boutonModifier);
 
 
     
-    boutonModifier.addEventListener("click", ()=>{
-        console.log(imageElement );
-        const fondPopup = document.createElement("div");
-        fondPopup.classList.add("fondPopup");
+        boutonModifier.addEventListener("click", ()=>{
+        
+            const fondPopup = document.createElement("div");
+            fondPopup.classList.add("fondPopup");
         // mettre les images
         // const contentPopup = document.createElement("div");
         // contentPopup.classList.add("content")
     
-        const popup = document.createElement("div");
-        popup.classList.add("popup");
-        popup.innerHTML = `
-            <div class="boutonFermer">X</div>
-            <h2>Galerie photo</h2>
-            <button >Toutes les photos </button>
-            // <div class="cont"></div>
+            const popup = document.createElement("div");
+            popup.classList.add("popup");
+            popup.innerHTML = `
+                <div class="boutonFermer">X</div>
+                <h2>Galerie photo</h2>
+                <div class="galeryModal"> </div> 
+                <button >Toutes les photos </button>
+            
            
              
-        `}
+        `;
+        fondPopup.append(popup)
+        document.body.append(fondPopup);
+        const galleryModal= popup.querySelector(".galleryModal");
+       
+        tousLesProjets.forEach(function(projet){
+            console.log(projets);
+            //créer une div
+            const divContenentlesImages = document.createElement("div");
+            divContenentlesImages.innerHTML=""  
+                
+            //A l'intérieur, on met l'image correspondant au projet
+            const imageElement2 = document.createElement("img");
+            imageElement2.src = projet.imageUrl;
+            
+
+            divContenentlesImages.append(imageElement);
+
+                
+                //Puis un bouton pour supprimer le projet
+                //Et on ajoute la div dans galleryModale
+        });
+
+
+    
+
+        // 
+
+
         // const imageElement = document.createElement("img");
         // imageElement.src = projet.imageUrl;
         
-    ;)
+    
     
         popup.querySelector(".boutonFermer").addEventListener("click", function() {
-            fondPopup.remove(); })
-    (t)
+            fondPopup.remove();
+         });
+    
 
         //  contentPopup=popup.querySelector("cont")
 
         const boutonAjout = document.createElement("div");
-    boutonAjout.classList.add("btn-ajt");
-    boutonAjout.innerText = "Ajouter";
-    popup.append(boutonAjout);
+        boutonAjout.classList.add("btn-ajt");
+        boutonAjout.innerText = "Ajouter";
+        popup.append(boutonAjout);
 
 
     
-    boutonAjout.addEventListener("click", ()=>{
-        console.log(imageElement )
-        const fondPopup = document.createElement("div");
-        fondPopup.classList.add("fondPopup");
+        boutonAjout.addEventListener("click", ()=>{
+
+            const fondPopup = document.createElement("div");
+            fondPopup.classList.add("fondPopup");
     
-        const popup2 = document.createElement("div");
-        popup2.classList.add("popup2");
-        popup.innerHTML = "";
+            const popup2 = document.createElement("div");
+            popup2.classList.add("popup2");
+            popup.innerHTML = "";
     
-        fondPopup.append(popup2);
+            fondPopup.append(popup2);
     
-        document.body.append(fondPopup);
-    })}}
+        
+        })
+    })
+
+}
+}
 
 
 
