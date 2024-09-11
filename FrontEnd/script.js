@@ -215,28 +215,27 @@ function adminUserMode() {
          });
     
 
-        //  contentPopup=popup.querySelector("cont")
 
-        const boutonAjout = document.createElement("div");
-        boutonAjout.classList.add("btn-ajt");
-        boutonAjout.innerText = "Ajouter";
-        popup.append(boutonAjout);
+        // const boutonAjout = document.createElement("div");
+        // boutonAjout.classList.add("btn-ajt");
+        // boutonAjout.innerText = "Ajouter";
+        // popup.append(boutonAjout);
 
 
     
-        boutonAjout.addEventListener("click", ()=>{
+        // boutonAjout.addEventListener("click", ()=>{
 
-            const fondPopup = document.createElement("div");
-            fondPopup.classList.add("fondPopup");
+        //     const fondPopup = document.createElement("div");
+        //     fondPopup.classList.add("fondPopup");
     
-            const popup2 = document.createElement("div");
-            popup2.classList.add("popup2");
-            popup.innerHTML = "";
+        //     const popup2 = document.createElement("div");
+        //     popup2.classList.add("popup2");
+        //     popup.innerHTML = "";
     
-            fondPopup.append(popup2);
+        //     fondPopup.append(popup2);
     
         
-        })
+        // })
     })
 
 }
