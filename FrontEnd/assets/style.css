@@ -169,7 +169,21 @@ a:hover {
 }
 
 .gallery img {
+	justify-content: center;
 	width: 100%;
+
+}
+.galleryModal {
+	width: 70%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	 grid-column-gap: 20px; 
+	grid-row-gap: 5px;
+	padding-left: 60px;
+	
+}
+.galleryModal img {
+	width: 20%;
 
 }
 #contact {
@@ -228,7 +242,7 @@ footer nav ul {
 	gap: 10px;
 	padding-bottom: 50px;
 }
-button{
+.filtre button{
     display: flex;
 	background-color: white;
     border: 2px solid  #1D6154;
@@ -255,11 +269,18 @@ button{
 	}
 	
 	.popup {
-	height: 50%;
+	height: 90%;
 	width: 50%;
 	background-color: white;
 	border-radius: 0.5rem;
 	}
+
+	.popup2 {
+		height: 90%;
+		width: 50%;
+		background-color: white;
+		border-radius: 0.5rem;
+		}
 
 
 
@@ -280,3 +301,32 @@ button{
 		transform: translate(-50, -50) scale(1);
 
 	}
+
+
+
+
+
+
+	.image-container {
+		position: relative; /* Le conteneur doit être en 'position: relative' pour l'icône */
+		display: inline-block; /* Maintenir la taille autour de l'image */
+	}
+	
+	.image-container img {
+		/* display: block; Assurer que l'image ne laisse pas d'espace en dessous */
+		width: 100%; /* Ajuster la taille de l'image si nécessaire */
+	}
+	
+	.delete-icon {
+		position: absolute;
+		top: 10px; /* Distance par rapport au haut */
+		right: 10px; /* Distance par rapport à la droite */
+		color:white; /* Couleur de l'icône (vous pouvez la changer) */
+		font-size: 15px; /* Taille de l'icône */
+		cursor: pointer; /* Change le curseur en pointeur quand on passe dessus */
+		background-color: black; /* Optionnel : un fond pour rendre l'icône plus visible */
+		/* padding: 5px; Espace autour de l'icône */
+	
+		
+	}
+	

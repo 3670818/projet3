@@ -9,6 +9,8 @@ fetch("http://localhost:5678/api/works").then(function (reponse) {
      });
  });
 
+
+
  let gallery;
 
   function afficherProjets(projets) {
@@ -118,6 +120,49 @@ adminUserMode()
 
 
 function adminUserMode() {
+    
+    
+
+    // const deleteMethod = {
+    //     method: 'DELETE', // Method itself
+    //     headers: {
+    //      'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+    //     },
+    //     // No need to have body, because we don't send nothing to the server.
+    //    }
+    //    // Make the HTTP Delete call using fetch api
+
+
+
+
+
+    //    fetch("http://localhost:5678/api/works", deleteMethod) 
+    //    .then(response => response.json())
+    //    .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+    //    .catch(err => console.log(err)) // Do something with the error
+
+
+
+    //    function deleteData(item, url) {
+    //     return fetch(url + '/' + item, {
+    //       method: 'delete'
+    //     })
+    //     .then(response => response.json());
+    //   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     const token = sessionStorage.getItem("token");
     const estConnecte =token !==null;
     if(estConnecte) {
@@ -133,10 +178,6 @@ function adminUserMode() {
     // afficherProjets(projetAppart)
     // console.log(projetAppart)
     // });
-
-   
-
-
 
 
 
@@ -171,36 +212,63 @@ function adminUserMode() {
             popup.innerHTML = `
                 <div class="boutonFermer">X</div>
                 <h2>Galerie photo</h2>
-                <div class="galeryModal"> </div> 
-                <button >Toutes les photos </button>
+                <div class="galleryModal"> </div> 
+                <button >ajouter une photo </button>
+                
             
            
              
         `;
         fondPopup.append(popup)
         document.body.append(fondPopup);
+        let galeryModal
         const galleryModal= popup.querySelector(".galleryModal");
+        
        
-        tousLesProjets.forEach(function(projet){
-            console.log(projets);
-            //créer une div
-            const divContenentlesImages = document.createElement("div");
-            divContenentlesImages.innerHTML=""  
+    
+           
+            tousLesProjets.forEach(function(projet) {
+                // Créer un élément figure
+                const figureModal = document.createElement("figure");
+               
+            
+                // Définir le contenu HTML de la figure avec une image et une légende
+                figureModal.innerHTML = `
+                  <div class="image-container">
+                 <img src="${projet.imageUrl}" alt="${projet.title}">
                 
-            //A l'intérieur, on met l'image correspondant au projet
-            const imageElement2 = document.createElement("img");
-            imageElement2.src = projet.imageUrl;
+                 <i id=${projet.id} class="fa-solid fa-trash-can delete-icon"></i>
+                    </div>
+    
+
+                    
+                `;
+            
+                // Sélectionner l'élément dans lequel vous voulez ajouter la figure
+                const galleryModal = document.querySelector(".galleryModal"); // Assurez-vous que ".galleryModal" est un sélecteur valide
+            
+                // Ajouter la figure dans la galleryModal
+                if (galleryModal) {
+                    galleryModal.append(figureModal);
+                } else {
+                    console.error("galleryModal non trouvée");
+                }
+            
+                // Vous pouvez ajouter ici le bouton de suppression si nécessaire
+                trashCan= document.querySelectorAll(".fa-trash-can");
+                console.log(trashCan);
+                trashCan.forEach((e) => 
+                    e.addEventListener('click',(event)=>deleteWork(event)));
+
+                  
+
+               
+
+            });
             
 
-            divContenentlesImages.append(imageElement);
 
-                
-                //Puis un bouton pour supprimer le projet
-                //Et on ajoute la div dans galleryModale
-        });
-
-
-    
+           
 
         // 
 
@@ -213,29 +281,43 @@ function adminUserMode() {
         popup.querySelector(".boutonFermer").addEventListener("click", function() {
             fondPopup.remove();
          });
+        
+    
     
 
 
-        // const boutonAjout = document.createElement("div");
-        // boutonAjout.classList.add("btn-ajt");
-        // boutonAjout.innerText = "Ajouter";
-        // popup.append(boutonAjout);
+         const boutonAjout = document.createElement("div");
+         boutonAjout.classList.add("btn-ajt");
+          boutonAjout.innerText = "Ajouter";
+         popup.append(boutonAjout);
 
 
     
-        // boutonAjout.addEventListener("click", ()=>{
+         boutonAjout.addEventListener("click", ()=>{
 
-        //     const fondPopup = document.createElement("div");
-        //     fondPopup.classList.add("fondPopup");
+            const fondPopup = document.createElement("div");
+            fondPopup.classList.add("fondPopup");
     
-        //     const popup2 = document.createElement("div");
-        //     popup2.classList.add("popup2");
-        //     popup.innerHTML = "";
+             const popup = document.createElement("div");
+             popup.classList.add("popup2");
+             popup.innerHTML = `
+                <div class="boutonFermer">X</div>
+                <h2>Galerie photo</h2>
+                
+            
+           
+             
+        `;
     
-        //     fondPopup.append(popup2);
+            fondPopup.append(popup);
+            popup.querySelector(".boutonFermer").addEventListener("click", function() {
+                fondPopup.remove();
+             });
+
+
     
         
-        // })
+         })
     })
 
 }
@@ -243,11 +325,74 @@ function adminUserMode() {
 
 
 
+  
+ // document.addEventListener('click',function(event){
+                //     if (event.target.classList.contains('fa-trash-icon')){
+                //         console.log('hello');
+                //     }
+                // });
+                
+                //     a.addEventListener("click",deleteWork)
+                    
+                    
+                    
+                  async function deleteWork(event) {
+                        //deletwork 
+                 const deleteApi="http://localhost:5678/api/works/";
+                 console.log(event)
+                        
+                    
+                
+                    // let form = {
+                    //   email: document.getElementById("email"),
+                    //   password: document.getElementById("password"),
+                    // };
+                  
+                //     fetch( deleteApi+`${id}`, {
+                //       method: "DELETE",
+                //       headers: {
+                //         Accept: "application/json",
+                //         "Content-Type": "application/json",
+                //       },
+                //       body: JSON.stringify({
+                //         email: form.email.value,
+                //         password: form.password.value,
+                //       }),
+                //     }).then((response) => {
+                //       if (response.status !== 200) {
+                //         alert("Email ou mot de passe erronés");
+                //       } else {
+                //         response.json().then((data) => {
+                //           sessionStorage.setItem("token", data.token); //STORE TOKEN
+                //           window.location.replace("index.html");
+                //         });
+                //       }
+                //     });
+                   };
+
+
+
+ 
+// })
+
+
+
+
+
+//   function deleteWork(id){
+  
+// }
 
 
 
     
-    
+// deleteButtons.forEach(button => {
+//     button.addEventListener('click', function() {
+//         // Supprimer la figure (image et légende) associée au bouton cliqué
+//         const figure = this.parentElement; // `this` fait référence au bouton, et `parentElement` à la figure
+//         figure.remove();
+//     });
+// })
     
     
     
