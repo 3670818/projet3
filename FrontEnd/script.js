@@ -211,12 +211,11 @@ function adminUserMode() {
             popup.classList.add("popup");
             popup.innerHTML = `
                 <div class="boutonFermer">X</div>
-                <h2>Galerie photo</h2>
+                <h3>Galerie photo</h3>
                 <div class="galleryModal"> </div> 
-                <button >ajouter une photo </button>
                 
-            
-           
+                
+        
              
         `;
         fondPopup.append(popup)
@@ -261,7 +260,6 @@ function adminUserMode() {
                     e.addEventListener('click',(event)=>deleteWork(event)));
 
                   
-
                
 
             });
@@ -286,42 +284,49 @@ function adminUserMode() {
     
 
 
+
+        // //ajouter le bouton modifier
+    // const boutonModifier = document.createElement("div");
+    // boutonModifier.classList.add("btn-modifier");
+    // boutonModifier.innerText = "Modifier";
+    // document.body.append(boutonModifier);
+        //ajouter le boutton ajout
+  
+            
+            
+    
+         
+    // `;
+
+
+
          const boutonAjout = document.createElement("div");
          boutonAjout.classList.add("btn-ajt");
           boutonAjout.innerText = "Ajouter";
-         popup.append(boutonAjout);
+          popup.append(boutonAjout);
 
 
-    
-         boutonAjout.addEventListener("click", ()=>{
+          boutonAjout.addEventListener("click", ()=>{
+            popup.remove();
 
-            const fondPopup = document.createElement("div");
-            fondPopup.classList.add("fondPopup");
+         const popup2 = document.createElement("div");
+         popup2.classList.add("popup2");
+         popup2.innerHTML = `
+         <div class="boutonFermer">X</div>`
+               
     
-             const popup = document.createElement("div");
-             popup.classList.add("popup2");
-             popup.innerHTML = `
-                <div class="boutonFermer">X</div>
-                <h2>Galerie photo</h2>
-                
-            
-           
-             
-        `;
-    
-            fondPopup.append(popup);
-            popup.querySelector(".boutonFermer").addEventListener("click", function() {
-                fondPopup.remove();
-             });
+            // fondPopup2.append(popup2);
+            // popup2.querySelector(".boutonFermer").addEventListener("click", function() {
+            //     fondPopup2.remove();
+            //  });
 
 
     
         
-         })
+        })
     })
-
-}
-}
+// }
+// }
 
 
 
@@ -339,39 +344,34 @@ function adminUserMode() {
                   async function deleteWork(event) {
                         //deletwork 
                  const deleteApi="http://localhost:5678/api/works/";
-                 console.log(event)
-                        
+                console.log(event.srcElement.id)
+                const id=event.srcElement.id
+
+
+
+                fetch(deleteApi+`http://localhost:5678/api/works${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+               
                     
-                
-                    // let form = {
-                    //   email: document.getElementById("email"),
-                    //   password: document.getElementById("password"),
-                    // };
-                  
-                //     fetch( deleteApi+`${id}`, {
-                //       method: "DELETE",
-                //       headers: {
-                //         Accept: "application/json",
-                //         "Content-Type": "application/json",
-                //       },
-                //       body: JSON.stringify({
-                //         email: form.email.value,
-                //         password: form.password.value,
-                //       }),
-                //     }).then((response) => {
-                //       if (response.status !== 200) {
-                //         alert("Email ou mot de passe erronés");
-                //       } else {
-                //         response.json().then((data) => {
-                //           sessionStorage.setItem("token", data.token); //STORE TOKEN
-                //           window.location.replace("index.html");
-                //         });
-                //       }
-                //     });
+            
+                    }).then((response) => {
+                      if (response.status !== 200) {
+                        alert("Problème détecté");
+                      } else {
+                        // response.json().then((data) => {
+                        //   sessionStorage.setItem("token", data.token); //STORE TOKEN
+                        //  let resultat = await response.json();
+                        //  console.log(resultat)
+                        // // });
+                      }
+                    });
                    };
 
 
-
+                }}
  
 // })
 

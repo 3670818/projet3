@@ -162,7 +162,7 @@ a:hover {
 .gallery {
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr ;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	
@@ -174,17 +174,31 @@ a:hover {
 
 }
 .galleryModal {
-	width: 70%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	 grid-column-gap: 20px; 
-	grid-row-gap: 5px;
-	padding-left: 60px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 10px;
+	padding: 0px 100px 0px 100px;
 	
 }
 .galleryModal img {
 	width: 20%;
 
+}
+.btn-ajt{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	font-size: 1.2em;
+	height: 39px;
+	border: none;
+	display: block;
 }
 #contact {
 	width: 50%;
@@ -275,6 +289,19 @@ footer nav ul {
 	border-radius: 0.5rem;
 	}
 
+	.popup h3{
+		padding-left: 267px;
+		padding-top: 20px;
+		width: 173px;
+        height: 30px;
+		top: 720px;
+		left: 634px;
+		gap: 0px;
+		opacity: 0px;
+
+
+	}
+
 	.popup2 {
 		height: 90%;
 		width: 50%;
@@ -326,6 +353,7 @@ footer nav ul {
 		cursor: pointer; /* Change le curseur en pointeur quand on passe dessus */
 		background-color: black; /* Optionnel : un fond pour rendre l'icône plus visible */
 		/* padding: 5px; Espace autour de l'icône */
+		background-size: auto;
 	
 		
 	}
