@@ -459,3 +459,8 @@ footer nav ul {
 	display: block;
 
 	}
+
+
+	.modalContent.preview i, .modalContent.preview label, .modalContent.preview p {
+		display: none;
+	}

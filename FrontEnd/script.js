@@ -334,13 +334,13 @@ function adminUserMode() {
             <label for="categorie">Catégorie</label>
 			<!-- <input type="categorie" name="Catégorie" id="category"> -->
 
-    <input list="options" id="category" name="categorie" placeholder="sélectionnez" required>
+   
     
-    <datalist id="options" >
-        <option value="1">Appartement</option>
-        <option value="2">Objet</option>
-        <option value="3">hotel et Restaurant</option>
-    </datalist>
+   <select id="categorie" name="categorie" placeholder="Sélectionner catégorie" required>
+                <option value="1">Appartement</option>
+                <option value="2">Objet</option>
+                <option value="3">hotel et Restaurant</option>
+            </select>
 			
             <button class="btn-valider-la-photo">Valider</button>
 		</form>
@@ -376,7 +376,8 @@ function adminUserMode() {
                           image.style.height = 'auto';  // Préserve le ratio de l'image
       
                           // Remplace le contenu de .modalContent par l'image
-                          modalContent.innerHTML = '';
+                          // Remplace le contenu de .modalContent par l'image
+                          modalContent.classList.add("preview");
                           modalContent.appendChild(image);
                       };
       
@@ -385,10 +386,10 @@ function adminUserMode() {
               });
 
             //   const formProjet= new FormData
-              popup2.querySelector(".btn-valider-la-photo").addEventListener("click", function() {
-                console.log("hello world")
+             
+              
+              };
               popup2.querySelector(".btn-valider-la-photo").addEventListener('click',(event)=>handleSumit(event));
-              });
         }
         }
 
@@ -425,7 +426,7 @@ function adminUserMode() {
 
     
         
-       }
+       
 // }
 // }
 
@@ -477,47 +478,46 @@ function adminUserMode() {
 
                    //API call for new work
                 async function handleSumit(event) {
-                // event.preventDefault();
-                const formProjet= new formProjet()
+               
+            
+                event.preventDefault();
+                const formProjet= new FormData()
             
                 let token = sessionStorage.getItem("token");
-                const select = document.getElementById("selectCategory");
-                //get data from form
-                const titlePopup = document.getElementById("title").innerText;
-                const imagePopup = document.getElementById("imagePreview").files[0];
-                // const categoryNamePopup= select.options[select.selectedIndex]
-                // const categoryId = 
+                const categorie = document.getElementById("categorie").value;
+                const titlePopup = document.getElementById("titre").value;
+                const imagePopup = document.getElementById("file").files[0];
             
-
-                formProjet.append("image",imagePopup)
+                formProjet.append("image",imagePopup, "test")
                 formProjet.append("title",titlePopup)
-                // formProjet.append("category",title)
+                formProjet.append("category", categorie)
 
                 const postApi="http://localhost:5678/api/works";
 
                 fetch(postApi, {
-                  method: "POST",
-                  headers: {
+                method: "POST",
+                headers: {
                     authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
+            
+                   // "Content-Type": "application/json",
                     //  "Content-Type: multipart/form-data"
 
                   },
                   body: formProjet,
                 })
                   .then((response) => {
-                    if (response.status !== 204) {
+                    if (response.status !== 201) {
                         alert("Problème détecté");
-                      } else {
-                        //Mettre à jour le tableau tousLesProjets pour enlever celui qu'on vient de supprimer
-                        tousLesProjets = tousLesProjets.filter(function(projet) {
-                            return projet.id !== Number(id);
-                        });
-                        //On appelle la fonction afficher projets pour mettre à jour les projets sur la page d'accueil
-                        afficherProjets(tousLesProjets);
-                        //On fait pareil pour la liste de projets dans la modale
-                        document.querySelector(".fondPopup").remove();
-                        document.querySelector(".btn-ajouter-une-photo").click();
+                    //   } else {
+                    //     //Mettre à jour le tableau tousLesProjets pour enlever celui qu'on vient de supprimer
+                    //     tousLesProjets = tousLesProjets.filter(function(projet) {
+                    //         return projet.id !== Number(id);
+                    //     });
+                    //     //On appelle la fonction afficher projets pour mettre à jour les projets sur la page d'accueil
+                    //     afficherProjets(tousLesProjets);
+                    //     //On fait pareil pour la liste de projets dans la modale
+                    //     document.querySelector(".fondPopup").remove();
+                    //     document.querySelector(".btn-ajouter-une-photo").click();
               }})
             }
 
