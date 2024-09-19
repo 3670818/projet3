@@ -213,7 +213,10 @@ function adminUserMode() {
                 <div class="boutonFermer">X</div>
                 <h3>Galerie photo</h3>
                 <div class="galleryModal"> </div> 
+                <button class="btn-ajouter-une-photo">ajouter une photo</button>
+
                 
+
                 
         
              
@@ -238,6 +241,7 @@ function adminUserMode() {
                 
                  <i id=${projet.id} class="fa-solid fa-trash-can delete-icon"></i>
                     </div>
+                    
     
 
                     
@@ -254,10 +258,10 @@ function adminUserMode() {
                 }
             
                 // Vous pouvez ajouter ici le bouton de suppression si nécessaire
-                trashCan= document.querySelectorAll(".fa-trash-can");
+                trashCan= figureModal.querySelector(".fa-trash-can");
                 console.log(trashCan);
-                trashCan.forEach((e) => 
-                    e.addEventListener('click',(event)=>deleteWork(event)));
+                
+                    trashCan.addEventListener('click',(event)=>deleteWork(event));
 
                   
                
@@ -285,7 +289,7 @@ function adminUserMode() {
 
 
 
-        // //ajouter le bouton modifier
+    //     //ajouter le bouton modifier
     // const boutonModifier = document.createElement("div");
     // boutonModifier.classList.add("btn-modifier");
     // boutonModifier.innerText = "Modifier";
@@ -295,24 +299,122 @@ function adminUserMode() {
             
             
     
-         
-    // `;
+    //        
+            // Gestion de l'ouverture de la deuxième popup
+            popup.querySelector(".btn-ajouter-une-photo").addEventListener("click", function() {
+                popup.remove();
+                openSecondPopup(fondPopup); // Passer l'overlay de la première popup à la fonction
+            });
+        });
+
+        // Fonction pour ouvrir la deuxième popup
+        function openSecondPopup(fondPopup) {
+            const popup2 = document.createElement("div");
+            popup2.classList.add("popup2");
+            popup2.innerHTML = `
+                <div class="boutonFermer">X</div>
+              <!-- <div class="modalHeader"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark"></i></div>-->
+			<h3 class="title">Ajout photo</h3>
+            <div class="portion-bleu-de-la-page">
+		        <div class="modalContent">
+                    <i class="fa-regular fa-image picture"></i>
+                    <label for="file" class="ajouter-une-photo">Ajouter une photo</label>
+                    <input type="file" id="file" name="file" accept="image/png, image/jpeg" required>
+                    <p class="texte-jpg-png">jpg, png : 4mo max</p>
+                    <img id="imagePreview" src="#" alt="Aperçu de l'image" />
+                </div>
+            </div>
+				
+		   <section id="contact">
+		    <form method="post">
+			<label for="titre">Titre</label>
+			<input type="text" id="titre" name="titre" placeholder="Tapez votre titre ici" required>
+
+			
+            <label for="categorie">Catégorie</label>
+			<!-- <input type="categorie" name="Catégorie" id="category"> -->
+
+    <input list="options" id="category" name="categorie" placeholder="sélectionnez" required>
+    
+    <datalist id="options" >
+        <option value="1">Appartement</option>
+        <option value="2">Objet</option>
+        <option value="3">hotel et Restaurant</option>
+    </datalist>
+			
+            <button class="btn-valider-la-photo">Valider</button>
+		</form>
+	</section>
+            `;
+            fondPopup.append(popup2);
+
+            // Gestion de la fermeture de la deuxième popup
+            popup2.querySelector(".boutonFermer").addEventListener("click", function() {
+                fondPopup.remove(); // Supprimer seulement la deuxième popup
+            });
+
+            popup2.querySelector(".ajouter-une-photo").addEventListener("click", function() {
+               console.log("hello world")
+             });
+              // Référence à l'input de fichier et l'image de prévisualisation
+              const fileInput = document.getElementById('file');
+              const modalContent = document.querySelector('.modalContent');
+      
+              // Écouteur d'événement pour détecter le changement de fichier
+              fileInput.addEventListener('change', function postNewWork(event) {
+                  const file = event.target.files[0];  // Récupère le fichier sélectionné
+      
+                  if (file) {
+                      const reader = new FileReader();  // Crée un FileReader pour lire le fichier
+      
+                      // Lorsque le fichier est chargé
+                      reader.onload = function(e) {
+                          // Crée une nouvelle balise <img>
+                          const image = document.createElement('img');
+                          image.src = e.target.result;  // Définit l'URL de l'image
+                          image.style.width = '37%';  // Rend l'image responsive
+                          image.style.height = 'auto';  // Préserve le ratio de l'image
+      
+                          // Remplace le contenu de .modalContent par l'image
+                          modalContent.innerHTML = '';
+                          modalContent.appendChild(image);
+                      };
+      
+                      reader.readAsDataURL(file);  // Lit le fichier comme une URL de données (data URL)
+                  }
+              });
+
+            //   const formProjet= new FormData
+              popup2.querySelector(".btn-valider-la-photo").addEventListener("click", function() {
+                console.log("hello world")
+              popup2.querySelector(".btn-valider-la-photo").addEventListener('click',(event)=>handleSumit(event));
+              });
+        }
+        }
 
 
 
-         const boutonAjout = document.createElement("div");
-         boutonAjout.classList.add("btn-ajt");
-          boutonAjout.innerText = "Ajouter";
-          popup.append(boutonAjout);
+        //  const boutonAjout = document.createElement("div");
+        //  boutonAjout.classList.add("btn-ajt");
+        //   boutonAjout.innerText = "Ajouter";
+        //   popup.append(boutonAjout);
 
 
-          boutonAjout.addEventListener("click", ()=>{
-            popup.remove();
 
-         const popup2 = document.createElement("div");
-         popup2.classList.add("popup2");
-         popup2.innerHTML = `
-         <div class="boutonFermer">X</div>`
+        //   boutonAjout.addEventListener("click", ()=>{
+
+            
+            
+
+
+            // const popup = document.createElement("div");
+            
+            
+            // popup2.classList.add("popup2");
+            // popup2.innerHTML = `
+            // <div class="boutonFermer">X</div>
+            // <h3>Galerie photo</h3>
+            // <div class="galleryModal"> </div> `
                
     
             // fondPopup2.append(popup2);
@@ -323,8 +425,7 @@ function adminUserMode() {
 
     
         
-        })
-    })
+       }
 // }
 // }
 
@@ -349,30 +450,161 @@ function adminUserMode() {
 
 
 
-                fetch(deleteApi+`http://localhost:5678/api/works${id}`, {
+                fetch(deleteApi+id, {
                     method: "DELETE",
+                    //token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4;
                     headers: {
                         "Authorization": "Bearer " + token
                     }
                
-                    
-            
                     }).then((response) => {
-                      if (response.status !== 200) {
+                      if (response.status !== 204) {
                         alert("Problème détecté");
                       } else {
-                        // response.json().then((data) => {
-                        //   sessionStorage.setItem("token", data.token); //STORE TOKEN
-                        //  let resultat = await response.json();
-                        //  console.log(resultat)
-                        // // });
+                        //Mettre à jour le tableau tousLesProjets pour enlever celui qu'on vient de supprimer
+                        tousLesProjets = tousLesProjets.filter(function(projet) {
+                            return projet.id !== Number(id);
+                        });
+                        //On appelle la fonction afficher projets pour mettre à jour les projets sur la page d'accueil
+                        afficherProjets(tousLesProjets);
+                        //On fait pareil pour la liste de projets dans la modale
+                        document.querySelector(".fondPopup").remove();
+                        document.querySelector(".btn-ajouter-une-photo").click();
                       }
                     });
                    };
 
 
-                }}
- 
+                   //API call for new work
+                async function handleSumit(event) {
+                // event.preventDefault();
+                const formProjet= new formProjet()
+            
+                let token = sessionStorage.getItem("token");
+                const select = document.getElementById("selectCategory");
+                //get data from form
+                const titlePopup = document.getElementById("title").innerText;
+                const imagePopup = document.getElementById("imagePreview").files[0];
+                // const categoryNamePopup= select.options[select.selectedIndex]
+                // const categoryId = 
+            
+
+                formProjet.append("image",imagePopup)
+                formProjet.append("title",titlePopup)
+                // formProjet.append("category",title)
+
+                const postApi="http://localhost:5678/api/works";
+
+                fetch(postApi, {
+                  method: "POST",
+                  headers: {
+                    authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    //  "Content-Type: multipart/form-data"
+
+                  },
+                  body: formProjet,
+                })
+                  .then((response) => {
+                    if (response.status !== 204) {
+                        alert("Problème détecté");
+                      } else {
+                        //Mettre à jour le tableau tousLesProjets pour enlever celui qu'on vient de supprimer
+                        tousLesProjets = tousLesProjets.filter(function(projet) {
+                            return projet.id !== Number(id);
+                        });
+                        //On appelle la fonction afficher projets pour mettre à jour les projets sur la page d'accueil
+                        afficherProjets(tousLesProjets);
+                        //On fait pareil pour la liste de projets dans la modale
+                        document.querySelector(".fondPopup").remove();
+                        document.querySelector(".btn-ajouter-une-photo").click();
+              }})
+            }
+
+
+
+
+
+
+                   
+
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //        async function postNewWork(event) {
+            //         //deletwork 
+            //  const postApi="http://localhost:5678/api/works/";
+            // console.log(event.srcElement.id)
+            // const id=event.srcElement.id
+
+
+
+            // fetch(postApi+id, {
+            //     method: "POST",
+            //     //token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4;
+            //     headers: {
+            //         "Authorization": "Bearer " + token
+            //     }
+           
+            //     }).then((response) => {
+            //       if (response.status !== 204) {
+            //         alert("Problème détecté");
+            //       } else {
+            //         //Mettre à jour le tableau tousLesProjets pour enlever celui qu'on vient de supprimer
+            //         tousLesProjets = tousLesProjets.filter(function(projet) {
+            //             return projet.id !== Number(id);
+            //         });
+            //         //On appelle la fonction afficher projets pour mettre à jour les projets sur la page d'accueil
+            //         afficherProjets(tousLesProjets);
+            //         //On fait pareil pour la liste de projets dans la modale
+            //         document.querySelector(".fondPopup").remove();
+            //         document.querySelector(".btn-ajouter-une-photo").click();
+            //       }
+            //     });
+            //    };
+
+            // const addToWorksprojet = function(projet, categoryName) {
+            //     newWork = {};
+            //     newWork.title = projet.title;
+            //     newWork.id = projet.id;
+            //     newWork.category = {"id" : projet.categoryId, "name" : categoryName};
+            //     newWork.imageUrl = projet.imageUrl;
+            //     worksprojet.push(newWork);
+            //   }
+              
+              
+
+
+                //    const switchmodal= function(){
+                //     document.querySelector(".popup").innerHTML='';
+                //    };
+
+                //    const addbouton= document.querySelector(".btn-ajt");
+                //    addbouton.addEventListener("click",switchmodal);
+
+
+
+                
+
+
+
 // })
 
 
