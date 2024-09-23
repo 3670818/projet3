@@ -192,10 +192,14 @@ function adminUserMode() {
 
 
        //ajouter le bouton modifier
-        const boutonModifier = document.createElement("div");
-        boutonModifier.classList.add("btn-modifier");
-        boutonModifier.innerText = "Modifier";
-        document.body.append(boutonModifier);
+       const boutonFiltre = document.querySelector(".btn-Appart");
+
+    
+
+        const boutonModifier = document.querySelector(".partieModifierPresDuTitre");
+        // boutonModifier.classList.add("btn-modifier");
+        // boutonModifier.innerText = "Modifier";
+        // document.body.append(boutonModifier);
 
 
     
@@ -385,11 +389,11 @@ function adminUserMode() {
                   }
               });
 
-            //   const formProjet= new FormData
+            
              
-              
+            popup2.querySelector(".btn-valider-la-photo").addEventListener('click',(event)=>handleSumit(event));
               };
-              popup2.querySelector(".btn-valider-la-photo").addEventListener('click',(event)=>handleSumit(event));
+              
         }
         }
 
@@ -448,11 +452,13 @@ function adminUserMode() {
                  const deleteApi="http://localhost:5678/api/works/";
                 console.log(event.srcElement.id)
                 const id=event.srcElement.id
+                let token = sessionStorage.getItem("token");
 
 
 
                 fetch(deleteApi+id, {
                     method: "DELETE",
+                    
                     //token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4;
                     headers: {
                         "Authorization": "Bearer " + token
@@ -470,56 +476,59 @@ function adminUserMode() {
                         afficherProjets(tousLesProjets);
                         //On fait pareil pour la liste de projets dans la modale
                         document.querySelector(".fondPopup").remove();
-                        document.querySelector(".btn-ajouter-une-photo").click();
+                        // document.querySelector(".btn-ajouter-une-photo").click();
+                        // voir si c'est utile
                       }
                     });
                    };
 
 
                    //API call for new work
-                async function handleSumit(event) {
-               
+                   async function handleSumit(event) {
+                    event.preventDefault();
+                    
+                    const formProjet = new FormData();
+                    let token = sessionStorage.getItem("token");
+                    const categorie = document.getElementById("categorie").value;
+                    const titlePopup = document.getElementById("titre").value;
+                    const imagePopup = document.getElementById("file").files[0];
+                  
+                    formProjet.append("image", imagePopup); // le nom du fichier sera pris automatiquement
+                    formProjet.append("title", titlePopup);
+                    formProjet.append("category", categorie);
+                  
+                    const postApi = "http://localhost:5678/api/works";
+                  
+                    try {
+                      const response = await fetch(postApi, {
+                        method: "POST",
+                        headers: {
+                          authorization: `Bearer ${token}`,
+                          // Ne pas spécifier Content-Type, le navigateur le gère automatiquement avec FormData
+                        },
+                        body: formProjet,
+                      });
+                  
+                      if (response.status !== 201) {
+                        alert("Problème détecté : " + response.status);
+                      } else {
+                        const newProject = await response.json(); // Récupérer la réponse JSON avec le nouveau projet
+                        tousLesProjets.push(newProject); // Ajouter le nouveau projet au tableau existant
+                  
+                        console.log("Projet ajouté avec succès !");
+                        
+                        // Mettre à jour l'affichage des projets
+                        afficherProjets(tousLesProjets);
+                  
+                        // Fermer la modale et réinitialiser les champs
+                        document.querySelector(".fondPopup").remove();
+                        document.querySelector(".btn-ajouter-une-photo").click();
+                      }
+                    } catch (error) {
+                      console.error("Erreur lors de l'ajout du projet :", error);
+                    }
+                  }
             
-                event.preventDefault();
-                const formProjet= new FormData()
-            
-                let token = sessionStorage.getItem("token");
-                const categorie = document.getElementById("categorie").value;
-                const titlePopup = document.getElementById("titre").value;
-                const imagePopup = document.getElementById("file").files[0];
-            
-                formProjet.append("image",imagePopup, "test")
-                formProjet.append("title",titlePopup)
-                formProjet.append("category", categorie)
-
-                const postApi="http://localhost:5678/api/works";
-
-                fetch(postApi, {
-                method: "POST",
-                headers: {
-                    authorization: `Bearer ${token}`,
-            
-                   // "Content-Type": "application/json",
-                    //  "Content-Type: multipart/form-data"
-
-                  },
-                  body: formProjet,
-                })
-                  .then((response) => {
-                    if (response.status !== 201) {
-                        alert("Problème détecté");
-                    //   } else {
-                    //     //Mettre à jour le tableau tousLesProjets pour enlever celui qu'on vient de supprimer
-                    //     tousLesProjets = tousLesProjets.filter(function(projet) {
-                    //         return projet.id !== Number(id);
-                    //     });
-                    //     //On appelle la fonction afficher projets pour mettre à jour les projets sur la page d'accueil
-                    //     afficherProjets(tousLesProjets);
-                    //     //On fait pareil pour la liste de projets dans la modale
-                    //     document.querySelector(".fondPopup").remove();
-                    //     document.querySelector(".btn-ajouter-une-photo").click();
-              }})
-            }
 
 
 
