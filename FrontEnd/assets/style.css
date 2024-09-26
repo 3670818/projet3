@@ -441,24 +441,27 @@ footer nav ul {
 }
 
 .popup {
-	height: 90%;
 	width: 50%;
 	background-color: white;
 	border-radius: 0.5rem;
 }
 
 .popup h3 {
-	padding-left: 267px;
-	padding-top: 20px;
+	margin: auto;
 	width: 173px;
 	height: 30px;
 	top: 720px;
 	left: 634px;
 	gap: 0px;
 	font-size: x-large;
-	padding-bottom: 10px;
+	padding-bottom: 2rem;
+}
 
-
+.popup .boutonFermer {
+	font-size: 1.2rem;
+	text-align: right;
+	padding: 2rem;
+	padding-bottom: 1rem;
 }
 
 .btn-ajouter-une-photo {
@@ -467,25 +470,28 @@ footer nav ul {
 	color: white;
 	background-color: #1D6154;
 	margin: 2em auto;
-	width: 180px;
 	text-align: center;
 	border-radius: 60px;
 	font-size: 1.2em;
 	height: 39px;
 	border: none;
 	display: block;
-
+	padding: 0px 3rem;
 }
 
 .popup2 {
-	height: 90%;
 	width: 50%;
 	background-color: white;
 	border-radius: 0.5rem;
 }
 
-
-
+.popup2 .boutons {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.2rem;
+	padding: 2rem;
+	padding-bottom: 1rem;
+}
 
 .modal {
 	position: fixed;
@@ -538,8 +544,8 @@ footer nav ul {
 	/* Optionnel : un fond pour rendre l'icône plus visible */
 	/* padding: 5px; Espace autour de l'icône */
 	background-size: auto;
-
-
+	padding: 0.2rem;
+	border-radius: 0.2em;
 }
 
 .portion-bleu-de-la-page {
@@ -570,6 +576,8 @@ footer nav ul {
 
 .ajouter-une-photo {
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	font-family: 'Syne';
 	font-weight: 500;
 	color: #306685;
@@ -581,8 +589,6 @@ footer nav ul {
 	/* font-size: 1.2em; */
 	height: 39px;
 	border: none;
-	display: block;
-
 }
 
 .texte-jpg-png {
@@ -634,13 +640,11 @@ input#file {
 }
 
 hr {
-	margin-top: 120px;
+	margin-top: 4rem;
 	width: 350px;
-top: 1207px;
-left: 510px;
-color: #FFFFFF;
-
-
+	top: 1207px;
+	left: 510px;
+	color: #FFFFFF;
 }
 .popup2 hr{
 	width: 350px;

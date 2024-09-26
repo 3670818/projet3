@@ -1,6 +1,3 @@
-
-//fetch("http://localhost:5678/api/user/login")
-
 document.addEventListener("submit", (e) => {
   e.preventDefault();
   let form = {
@@ -8,7 +5,7 @@ document.addEventListener("submit", (e) => {
     password: document.getElementById("password"),
   };
 
-  fetch( "http://localhost:5678/api/users/login", {
+  fetch("http://localhost:5678/api/users/login", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -20,7 +17,7 @@ document.addEventListener("submit", (e) => {
     }),
   }).then((response) => {
     if (response.status !== 200) {
-      alert("Email ou mot de passe erronés");
+      alert("Email ou mot de passe erronÃ©s");
     } else {
       response.json().then((data) => {
         sessionStorage.setItem("token", data.token); //STORE TOKEN
