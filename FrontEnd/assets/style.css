@@ -142,6 +142,17 @@ body {
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
+header ul li {
+    font-size: 16px; /* Taille de la police */
+    color: #000; /* Couleur du texte */
+}
+
+/* Style pour les liens dans la liste */
+header ul li a {
+    text-decoration: none; /* Enlever le soulignement */
+    color: inherit; /* Inherit pour reprendre la couleur du parent */
+    font-size: inherit; /* Garder la même taille que l'élément parent */
+}
 
 .bandeauEdition {
 	display: none;
@@ -425,6 +436,19 @@ footer nav ul {
 	padding: 2px 19px 2px 19px;
 	align-items: center;
 	height: 40px;
+}
+
+/* Effet hover (au survol) */
+.filtre button:hover {
+    background-color: #1D6154; /* Couleur lors du survol */
+    color: white; /* Change la couleur du texte lors du survol */
+}
+
+/* Effet focus (quand le bouton est sélectionné ou activé) */
+.filtre button:focus, .filtre button:active {
+    background-color: #1D6154; /* Couleur qui reste après la sélection */
+    color: white; /* Change la couleur du texte après la sélection */
+    outline: none; /* Enlever le contour par défaut après clic */
 }
 
 .fondPopup {

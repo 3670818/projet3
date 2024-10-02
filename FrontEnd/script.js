@@ -12,7 +12,6 @@ fetch("http://localhost:5678/api/works").then(function (reponse) {
 let gallery;
 
 function afficherProjets(projets) {
-    console.log("PROJETS", projets);
     gallery = document.querySelector(".gallery");
     gallery.innerHTML = "";
     projets.forEach(function (projet) {
@@ -119,14 +118,10 @@ function openFirstPopup() {
         // Ajouter la figure dans la galleryModal
         if (galleryModal) {
             galleryModal.append(figureModal);
-        } else {
-            console.error("galleryModal non trouvée");
         }
 
         // Vous pouvez ajouter ici le bouton de suppression si nécessaire
         trashCan = figureModal.querySelector(".fa-trash-can");
-        console.log(trashCan);
-
         trashCan.addEventListener('click', (event) => deleteWork(event));
     });
 
@@ -160,26 +155,22 @@ function openSecondPopup(fondPopup) {
             </div>
         </div>
         <section id="contact">
-            <form method="post">
+            <form id="formProjet" method="post">
                 <label for="titre">Titre</label>
                 <input type="text" id="titre" name="titre" placeholder="Tapez votre titre ici" required>
                 <label for="categorie">Catégorie</label>
                 <select id="categorie" name="categorie" placeholder="Sélectionner catégorie" required>
+                 <option value="1">Appartement</option>
+                 <option value="2">Objet</option>
+                 <option value="3">hotel et Restaurant</option>
                 </select>
-                <button class="btn-valider-la-photo">Valider</button>
+                <button class="btn-valider-la-photo" type="submit">Valider</button>
             </form>
         </section>
     `;
+
+    // Ajout de la popup au fondPopup
     fondPopup.append(popup2);
-
-    const selectCategories = popup2.querySelector("select");
-    toutesLesCategories.forEach(categorie => {
-        const option = document.createElement("option");
-        option.innerText = categorie.name;
-        option.value = categorie.id;
-        selectCategories.append(option);
-    });
-
     popup2.querySelector(".boutonRetour").addEventListener("click", function () {
         fondPopup.remove(); // Supprimer seulement la deuxième popup
         openFirstPopup();
@@ -191,7 +182,6 @@ function openSecondPopup(fondPopup) {
     });
 
     popup2.querySelector(".ajouter-une-photo").addEventListener("click", function () {
-        console.log("hello world")
     });
 
     // Référence à l'input de fichier et l'image de prévisualisation
@@ -227,7 +217,6 @@ function openSecondPopup(fondPopup) {
 
 async function deleteWork(event) {
     const deleteApi = "http://localhost:5678/api/works/";
-    console.log(event.srcElement.id)
     const id = event.srcElement.id
     let token = sessionStorage.getItem("token");
     fetch(deleteApi + id, {
@@ -252,8 +241,6 @@ async function deleteWork(event) {
         }
     });
 };
-
-//API call for new work
 async function handleSumit(event) {
     event.preventDefault();
 
@@ -263,7 +250,13 @@ async function handleSumit(event) {
     const titlePopup = document.getElementById("titre").value;
     const imagePopup = document.getElementById("file").files[0];
 
-    formProjet.append("image", imagePopup); // le nom du fichier sera pris automatiquement
+    // S'assurer que les champs ne sont pas vides
+    if (!titlePopup || !categorie || !imagePopup) {
+        alert("Veuillez remplir tous les champs.");
+        return; // Sortir si les champs ne sont pas valides
+    }
+
+    formProjet.append("image", imagePopup);
     formProjet.append("title", titlePopup);
     formProjet.append("category", categorie);
 
@@ -274,26 +267,21 @@ async function handleSumit(event) {
             method: "POST",
             headers: {
                 authorization: `Bearer ${token}`,
-                // Ne pas spécifier Content-Type, le navigateur le gère automatiquement avec FormData
+                // Ne pas spécifier Content-Type
             },
             body: formProjet,
         });
 
-        if (response.status !== 201) {
-            alert("Problème détecté : " + response.status);
-        } else {
-            const newProject = await response.json(); // Récupérer la réponse JSON avec le nouveau projet
-            tousLesProjets.push(newProject); // Ajouter le nouveau projet au tableau existant
-
-            console.log("Projet ajouté avec succès !");
-
-            // Mettre à jour l'affichage des projets
+        if (response.status === 201) {
+            const newProject = await response.json();
+            tousLesProjets.push(newProject);
             afficherProjets(tousLesProjets);
-
-            // Fermer la modale et réinitialiser les champs
             document.querySelector(".fondPopup").remove();
+        } else {
+            const errorData = await response.json();
+            alert("Problème détecté : " + response.status + " - " + errorData.message);
         }
     } catch (error) {
-        console.error("Erreur lors de l'ajout du projet :", error);
+        alert("Une erreur est survenue lors de l'envoi du projet.");
     }
 }
