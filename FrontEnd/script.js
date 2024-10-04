@@ -1,19 +1,17 @@
 let toutesLesCategories;
 let tousLesProjets;
-let modal;
+let gallery;
 
 fetch("http://localhost:5678/api/works").then(function (reponse) {
     reponse.json().then(function (projets) {
         tousLesProjets = projets;
-        afficherProjets(projets);
+        afficherProjets(projets); // Afficher tous les projets au chargement de la page
     });
 });
 
-let gallery;
-
 function afficherProjets(projets) {
     gallery = document.querySelector(".gallery");
-    gallery.innerHTML = "";
+    gallery.innerHTML = "";  // Vider la galerie avant d'ajouter des projets
     projets.forEach(function (projet) {
         const sectionFiches = document.createElement("figure");
         const imageElement = document.createElement("img");
@@ -24,11 +22,27 @@ function afficherProjets(projets) {
         sectionFiches.append(article);
         gallery.appendChild(sectionFiches);
     });
-};
+}
 
 function ajouterFiltres() {
     const divFiltre = document.querySelector(".filtre");
+    
+    // Ajout du bouton "Toutes les photos"
+    const boutonTous = document.createElement("button");
+    boutonTous.classList.add("btn-tous");
+    boutonTous.innerText = "Toutes les photos";
+    divFiltre.append(boutonTous);
 
+    // Activer la classe 'active' sur le bouton "Toutes les photos" par défaut
+    boutonTous.classList.add("active");
+
+    // Événement pour afficher tous les projets au clic sur "Toutes les photos"
+    boutonTous.addEventListener("click", function () {
+        afficherProjets(tousLesProjets);
+        mettreAJourBoutonActif(boutonTous); // Activer le bouton "Toutes les photos"
+    });
+
+    // Ajouter les boutons de filtres pour chaque catégorie
     toutesLesCategories.forEach(categorie => {
         const boutonFiltre = document.createElement("button");
         boutonFiltre.classList.add("boutonFiltre");
@@ -37,26 +51,37 @@ function ajouterFiltres() {
             const projetFiltres = tousLesProjets.filter(function (projet) {
                 return projet.category.name === categorie.name;
             });
-            afficherProjets(projetFiltres)
+            afficherProjets(projetFiltres);
+            mettreAJourBoutonActif(boutonFiltre); // Activer le bouton de la catégorie sélectionnée
         });
         divFiltre.append(boutonFiltre);
     });
+}
 
-    const boutonTous = document.querySelector(".btn-tous");
-    boutonTous.addEventListener("click", function () {
-        const projetTous = tousLesProjets
-        afficherProjets(projetTous)
-    });
+// Fonction pour mettre à jour les boutons actifs
+function mettreAJourBoutonActif(boutonActif) {
+    // Retirer la classe 'active' de tous les boutons
+    const boutonsFiltres = document.querySelectorAll(".filtre button");
+    boutonsFiltres.forEach(bouton => bouton.classList.remove('active'));
+
+    // Ajouter la classe 'active' au bouton cliqué
+    boutonActif.classList.add('active');
 }
 
 window.onload = function () {
-    fetch("http://localhost:5678/api/categories").then(function (reponse) {
-        reponse.json().then(function (categories) {
+    // Récupérer les catégories et ajouter les filtres
+    fetch("http://localhost:5678/api/categories")
+        .then(function (reponse) {
+            return reponse.json();
+        })
+        .then(function (categories) {
             toutesLesCategories = categories;
-            adminUserMode()
+            adminUserMode() 
         });
-    });
+        
 };
+
+
 
 function adminUserMode() {
     const token = sessionStorage.getItem("token");

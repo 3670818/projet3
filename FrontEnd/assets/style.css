@@ -437,20 +437,24 @@ footer nav ul {
 	align-items: center;
 	height: 40px;
 }
-
-/* Effet hover (au survol) */
-.filtre button:hover {
+ 
+/* Effet hover (au survol)  */
+    .filtre button:hover {
     background-color: #1D6154; /* Couleur lors du survol */
     color: white; /* Change la couleur du texte lors du survol */
 }
 
 /* Effet focus (quand le bouton est sélectionné ou activé) */
 .filtre button:focus, .filtre button:active {
-    background-color: #1D6154; /* Couleur qui reste après la sélection */
+    background-color: #1D6154; 
+    color: white; 
+    outline: none; 
+}
+.boutonFiltre.active, .btn-tous.active {
+	background-color: #1D6154; /* Couleur qui reste après la sélection */
     color: white; /* Change la couleur du texte après la sélection */
     outline: none; /* Enlever le contour par défaut après clic */
 }
-
 .fondPopup {
 	position: fixed;
 	top: 0;
