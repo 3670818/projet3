@@ -1,0 +1,683 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+	background-color: #FFFEF8;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/** end reset css**/
+body {
+	max-width: 1140px;
+	margin: auto;
+	font-family: 'Work Sans';
+	font-size: 14px;
+}
+header ul li {
+    font-size: 16px; /* Taille de la police */
+    color: #000; /* Couleur du texte */
+}
+
+/* Style pour les liens dans la liste */
+header ul li a {
+    text-decoration: none; /* Enlever le soulignement */
+    color: inherit; /* Inherit pour reprendre la couleur du parent */
+    font-size: inherit; /* Garder la même taille que l'élément parent */
+}
+
+.bandeauEdition {
+	display: none;
+
+}
+
+body.estConnecte .bandeauEdition {
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	color: white;
+	background-color: black;
+	height: 59px;
+}
+
+.partieModifierPresDuTitre {
+	display: none;
+
+}
+
+body.estConnecte .partieModifierPresDuTitre {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	gap: 5px;
+
+}
+
+.partietitremodifier {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	gap: 15px;
+
+}
+
+.title {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	padding-top: 20px;
+	padding-left: 5px;
+
+}
+
+.popup2 .title {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: black;
+	/* padding-top: 20px ; */
+	padding-bottom: 15px;
+	font-size: x-large;
+
+}
+
+/**body.connecte .filtre{
+	display: none;
+}**/
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
+section {
+	margin: 50px 0
+}
+
+h1 {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1>span {
+	font-family: 'Work Sans';
+	font-size: 10px;
+	letter-spacing: 0.1em;
+	;
+}
+
+h2 {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+
+}
+
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+
+}
+
+li:hover {
+	color: #B1663C;
+}
+
+nav a {
+	padding: 0 10px;
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
+#introduction {
+	display: flex;
+	align-items: center;
+}
+
+#introduction figure {
+	flex: 1
+}
+
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1
+}
+
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+
+#portfolio h2 {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+
+}
+
+.gallery img {
+	justify-content: center;
+	width: 100%;
+
+}
+
+.galleryModal {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 1fr;
+	grid-column-gap: 8px;
+	grid-row-gap: 10px;
+	padding: 0px 100px 0px 100px;
+
+}
+
+.galleryModal img {
+	width: 20%;
+
+}
+
+.btn-ajt {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	font-size: 1.2em;
+	height: 39px;
+	border: none;
+	display: block;
+}
+
+#contact {
+	width: 50%;
+	margin: auto;
+}
+
+#contact>* {
+	text-align: center;
+
+}
+
+#contact h2 {
+	margin-bottom: 20px;
+}
+
+#contact form {
+	text-align: left;
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 40px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact label {
+	margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#categorie {
+	height: 40px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+}
+
+input[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+}
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+.filtre {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	padding-bottom: 50px;
+}
+
+.filtre button {
+	display: flex;
+	background-color: white;
+	border: 2px solid #1D6154;
+	color: #1D6154;
+	font-family: syne;
+	border-radius: 40px 40px 40px 40px;
+	gap: 10px;
+	padding: 2px 19px 2px 19px;
+	align-items: center;
+	height: 40px;
+}
+ 
+/* Effet hover (au survol)  */
+    .filtre button:hover {
+    background-color: #1D6154; /* Couleur lors du survol */
+    color: white; /* Change la couleur du texte lors du survol */
+}
+
+/* Effet focus (quand le bouton est sélectionné ou activé) */
+.filtre button:focus, .filtre button:active {
+    background-color: #1D6154; 
+    color: white; 
+    outline: none; 
+}
+.boutonFiltre.active, .btn-tous.active {
+	background-color: #1D6154; /* Couleur qui reste après la sélection */
+    color: white; /* Change la couleur du texte après la sélection */
+    outline: none; /* Enlever le contour par défaut après clic */
+}
+.fondPopup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup {
+	width: 50%;
+	background-color: white;
+	border-radius: 0.5rem;
+}
+
+.popup h3 {
+	margin: auto;
+	width: 173px;
+	height: 30px;
+	top: 720px;
+	left: 634px;
+	gap: 0px;
+	font-size: x-large;
+	padding-bottom: 2rem;
+}
+
+.popup .boutonFermer {
+	font-size: 1.2rem;
+	text-align: right;
+	padding: 2rem;
+	padding-bottom: 1rem;
+}
+
+.btn-ajouter-une-photo {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	text-align: center;
+	border-radius: 60px;
+	font-size: 1.2em;
+	height: 39px;
+	border: none;
+	display: block;
+	padding: 0px 3rem;
+}
+
+.popup2 {
+	width: 50%;
+	background-color: white;
+	border-radius: 0.5rem;
+}
+
+.popup2 .boutons {
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.2rem;
+	padding: 2rem;
+	padding-bottom: 1rem;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); /* Ajout du % */
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	width: 300px;
+
+}
+
+.modal .modal.active {
+	transform: translate(-50%, -50%)scale(1);
+
+}
+
+
+
+
+
+
+.image-container {
+	position: relative;
+	/* Le conteneur doit être en 'position: relative' pour l'icône */
+	display: inline-block;
+	/* Maintenir la taille autour de l'image */
+}
+
+.image-container img {
+	/* display: block; Assurer que l'image ne laisse pas d'espace en dessous */
+	width: 100%;
+	/* Ajuster la taille de l'image si nécessaire */
+}
+
+.delete-icon {
+	position: absolute;
+	top: 10px;
+	/* Distance par rapport au haut */
+	right: 10px;
+	/* Distance par rapport à la droite */
+	color: white;
+	/* Couleur de l'icône (vous pouvez la changer) */
+	font-size: 15px;
+	/* Taille de l'icône */
+	cursor: pointer;
+	/* Change le curseur en pointeur quand on passe dessus */
+	background-color: black;
+	/* Optionnel : un fond pour rendre l'icône plus visible */
+	/* padding: 5px; Espace autour de l'icône */
+	background-size: auto;
+	padding: 0.2rem;
+	border-radius: 0.2em;
+}
+
+.portion-bleu-de-la-page {
+	display: flex;
+	justify-content: center;
+}
+
+.modalContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #E8F1F6;
+	height: 150px;
+	width: 300px;
+
+}
+
+.picture {
+	font-size: 70px;
+	color: #CBD6DC;
+	align-items: center;
+}
+
+
+
+
+
+.ajouter-une-photo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Syne';
+	font-weight: 500;
+	color: #306685;
+	background-color: #CBD6DC;
+	/* margin : 2em auto ; */
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	/* font-size: 1.2em; */
+	height: 39px;
+	border: none;
+}
+
+.texte-jpg-png {
+	display: flex;
+	justify-content: center;
+	
+}
+
+
+
+input#file {
+	display: none;
+}
+
+#imagePreview {
+	display: none;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.btn-valider-la-photo {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	font-size: 1.2em;
+	height: 39px;
+	border: none;
+	display: block;
+
+}
+
+
+.modalContent.preview i,
+.modalContent.preview label,
+.modalContent.preview p {
+	display: none;
+}
+
+
+
+.titre-galerie{
+	height: auto;
+}
+
+hr {
+	margin-top: 4rem;
+	width: 350px;
+	top: 1207px;
+	left: 510px;
+	color: #FFFFFF;
+}
+.popup2 hr{
+	width: 350px;
+top: 1207px;
+left: 510px;
+color: #FFFFFF;
+
+}
